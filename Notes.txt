@@ -1,0 +1,17 @@
+230503 1049
+
+Notes
+
+1992_IS92:
+https://sedac.ciesin.columbia.edu/ddc/is92/index.html
+/sync/Papers/IPCC_1992_IS92
+
+2000_SRES:
+https://sedac.ciesin.columbia.edu/ddc/sres/index.html
+/sync/Papers/IPCC_2000_SRES
+
+2011_RCP:
+https://sedac.ciesin.columbia.edu/ddc/ar5_scenario_process/RCPs.html
+
+2018_SSP:
+https://tntcat.iiasa.ac.at/SspDb/dsd?Action=htmlpage&page=welcome
