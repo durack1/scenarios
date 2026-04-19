@@ -15,10 +15,21 @@ https://ipcc-data.climate.columbia.edu/content/tar-baseline-data-regional-impact
 https://sedac.ciesin.columbia.edu/ddc/is92/index.html
 https://ipcc-data.climate.columbia.edu/content/scenario-data-is92
 /sync/Papers/IPCC_1992_IS92
+CMIP2:
+IS92a
+- Data starts 1985, 1990, 1995, 2000, ... , 2075, 2100
+- First divergent year 1995
 
 2000_SRES:
 https://sedac.ciesin.columbia.edu/ddc/sres/index.html
 /sync/Papers/IPCC_2000_SRES
+CMIP3:
+sresa1b
+sresa2
+sresb1
+- Data starts 1990, 2000, 2010, 2020, ... , 2090, 2100
+- First divergent year 2010
+
 
 2011_RCP:
 https://sedac.ciesin.columbia.edu/ddc/ar5_scenario_process/RCPs.html
@@ -26,16 +37,46 @@ https://iiasa.ac.at/models-tools-data/rcp
 https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=download
 "Bulk Data Downloads (per RCP)"
 https://iiasa.ac.at/impacts/nov-2014/scenarios-for-ipcc-fifth-assessment-report
+CMIP5:
+rcp26
+rcp45
+rcp60
+rcp85
+- Data starts 2000, 2005, 2010, 2020, ... , 2090, 2100
+- First divergent year 2010
+
 
 2018_SSP
 https://iiasa.ac.at/models-tools-data/ssp
 https://ssp.apps.ece.iiasa.ac.at/
 https://zenodo.org/records/7197970
+https://tntcat.iiasa.ac.at/SspDb/dsd?Action=htmlpage&page=welcome
+CMIP6:
+IAMC-IMAGE-ssp119
+IAMC-IMAGE-ssp126
+IAMC-MESSAGE-GLOBIOM-ssp245
+IAMC-AIM-ssp370 (AIM/CGE SSP3-Baseline)
+IAMC-GCAM4-ssp434
+IAMC-GCAM4-ssp460
+IAMC-REMIND-MAGPIE-ssp534-over
+IAMC-REMIND-MAGPIE-ssp585 (REMIND-MAGPIE SSP5-Baseline)
+- Data starts 2005, 2010, 2020, 2030, ... , 2090, 2100
+- First divergent year 2005
+
 
 2026_ScenarioMIP
 https://zenodo.org/records/14382495
 https://github.com/chrisroadmap/cmip7-scenariomip
-
+CMIP7:
+high-overshoot
+high-extension
+verylow
+verylow-overshoot
+low
+medium-extension
+medium-overshoot
+- Data starts 1750.5, 1751.5, 1752.5, 1753.5, ... , 2099.5, 2100.5 -> 2500.5
+- First divergent year 2023
 
 
 251201 1542
@@ -43,6 +84,3 @@ https://iiasa.ac.at/models-tools-data/rcp
 https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=welcome <- contributor list
 https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=download <- download links
 https://iiasa.ac.at/impacts/nov-2014/scenarios-for-ipcc-fifth-assessment-report
-
-2018_SSP:
-https://tntcat.iiasa.ac.at/SspDb/dsd?Action=htmlpage&page=welcome
