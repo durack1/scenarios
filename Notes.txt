@@ -1,9 +1,19 @@
+260419 1315
+251204 0606
 230503 1049
 
 Notes
 
+Girod et al., 2009 The evolution of the IPCC’s emissions scenarios. Environmental Science & Policy, 12 (2), pp 103-118. doi: 10.1016/j.envsci.2008.12.006
+
+1990_SA90:
+https://ipcc-data.climate.columbia.edu/content/baseline-data
+https://ipcc-data.climate.columbia.edu/content/tar-baseline-data-regional-impacts-of-climate-change
+- No emissions data
+
 1992_IS92:
 https://sedac.ciesin.columbia.edu/ddc/is92/index.html
+https://ipcc-data.climate.columbia.edu/content/scenario-data-is92
 /sync/Papers/IPCC_1992_IS92
 
 2000_SRES:
@@ -12,6 +22,27 @@ https://sedac.ciesin.columbia.edu/ddc/sres/index.html
 
 2011_RCP:
 https://sedac.ciesin.columbia.edu/ddc/ar5_scenario_process/RCPs.html
+https://iiasa.ac.at/models-tools-data/rcp
+https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=download
+"Bulk Data Downloads (per RCP)"
+https://iiasa.ac.at/impacts/nov-2014/scenarios-for-ipcc-fifth-assessment-report
+
+2018_SSP
+https://iiasa.ac.at/models-tools-data/ssp
+https://ssp.apps.ece.iiasa.ac.at/
+https://zenodo.org/records/7197970
+
+2026_ScenarioMIP
+https://zenodo.org/records/14382495
+https://github.com/chrisroadmap/cmip7-scenariomip
+
+
+
+251201 1542
+https://iiasa.ac.at/models-tools-data/rcp
+https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=welcome <- contributor list
+https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=download <- download links
+https://iiasa.ac.at/impacts/nov-2014/scenarios-for-ipcc-fifth-assessment-report
 
 2018_SSP:
 https://tntcat.iiasa.ac.at/SspDb/dsd?Action=htmlpage&page=welcome
