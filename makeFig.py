@@ -505,6 +505,31 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
         label="Historical (GCP/OWID)",
     )
 
+    # ── right-side 2100 summary bars ─────────────────────────────────────────
+    ax.axvline(2102.5, color="0.75", lw=0.8, ls=":", zorder=1)
+    bar_x = {"SA90": 2104.5, "IS92": 2106, "SRES": 2107.5,
+              "RCP": 2109, "SSP": 2110.5, "CMIP7": 2112}
+    tick_hw = 0.55
+    for gen, t, dct, conv in shade_families:
+        if not dct:
+            continue
+        matrix = np.array([interp(t, vals) * conv for vals in dct.values()])
+        col = matrix[:, idx_2100]
+        col = col[~np.isnan(col)]
+        if not len(col):
+            continue
+        p10 = np.percentile(col, 10)
+        p50 = np.percentile(col, 50)
+        p90 = np.percentile(col, 90)
+        c = GEN_COLORS[gen]
+        bx = bar_x[gen]
+        ax.plot([bx, bx], [p10, p90], color=c, lw=1.5, zorder=5,
+                solid_capstyle="round")
+        ax.plot([bx - tick_hw, bx + tick_hw], [p10, p10], color=c, lw=1.5, zorder=5)
+        ax.plot([bx - tick_hw, bx + tick_hw], [p90, p90], color=c, lw=1.5, zorder=5)
+        ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [p50, p50],
+                color=c, lw=1.5, zorder=5)
+
     # ── "futures avoided / opportunities lost" annotations ───────────────────
     ax.annotate(
         "Futures\navoided",
@@ -546,7 +571,7 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
     )
 
     # ── axes decoration ──────────────────────────────────────────────────────
-    ax.set_xlim(1983, 2108)
+    ax.set_xlim(1983, 2115)
     ax.set_ylim(-35, 145)
     ax.set_xlabel("Year", fontsize=11)
     ax.set_ylabel("CO₂ emissions (Gt CO₂ yr⁻¹)", fontsize=11)
