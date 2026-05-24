@@ -452,6 +452,9 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
         ax.fill_between(T_FINE, p10, p90,
                         color=GEN_COLORS[gen], alpha=0.10, zorder=0,
                         linewidth=0)
+        c = GEN_COLORS[gen]
+        ax.plot(T_FINE, p10, color=c, lw=0.8, alpha=0.6, zorder=1, solid_capstyle="round")
+        ax.plot(T_FINE, p90, color=c, lw=0.8, alpha=0.6, zorder=1, solid_capstyle="round")
 
     # ── CMIP-used scenario lines ─────────────────────────────────────────────
     cmip_families = [
@@ -463,16 +466,29 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
         ("CMIP7", CMIP7_TIME, cmip7_scenarios, 1.0,
          list(cmip7_scenarios.keys())),
     ]
+    idx_2100 = np.argmin(np.abs(T_FINE - 2100))
     for gen, t, dct, conv, selected in cmip_families:
         c = GEN_COLORS[gen]
+        # interpolate all selected curves first so we can rank by 2100 value
+        curves = {}
         for name in selected:
             if name not in dct:
                 print(f"  WARNING: {name!r} not found in {gen} data")
                 continue
-            y = interp(t, dct[name]) * conv
+            curves[name] = interp(t, dct[name]) * conv
+        if not curves:
+            continue
+        # identify extreme (highest/lowest at 2100) vs intermediate scenarios
+        end_vals = {n: (y[idx_2100] if not np.isnan(y[idx_2100]) else np.nanmax(y))
+                    for n, y in curves.items()}
+        sorted_names = sorted(end_vals, key=end_vals.get)
+        extremes = {sorted_names[0], sorted_names[-1]}
+        for name, y in curves.items():
+            bold = name in extremes or len(curves) == 1
+            if not bold:
+                continue
             ax.plot(T_FINE, y, color=c, lw=2.0, alpha=0.92,
                     zorder=4, solid_capstyle="round")
-            # end-of-line label at last valid point
             valid = np.where(~np.isnan(y))[0]
             if not len(valid):
                 continue
