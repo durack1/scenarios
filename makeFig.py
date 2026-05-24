@@ -532,17 +532,99 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
     return fig
 
 
+# ─── per-generation statistics ───────────────────────────────────────────────
+
+def family_stats(time, data_dict, conv=1.0):
+    """Return (mean, p10, p90) arrays on T_FINE across all scenarios."""
+    matrix = np.array([
+        interp(time, vals) * conv for vals in data_dict.values()
+    ])
+    mean = np.nanmean(matrix, axis=0)
+    p10  = np.nanpercentile(matrix, 10, axis=0)
+    p90  = np.nanpercentile(matrix, 90, axis=0)
+    return mean, p10, p90
+
+
+# ─── average-per-generation sanity-check figure ───────────────────────────────
+
+def make_figure_avg(cmip7_scenarios, hist_years, hist_vals):
+    """Single mean line per generation — sanity check for downward trend."""
+    families = [
+        ("SA90",  SA90_TIME,  SA90,  C_TO_CO2),
+        ("IS92",  IS92_TIME,  IS92,  C_TO_CO2),
+        ("SRES",  SRES_TIME,  SRES,  C_TO_CO2),
+        ("RCP",   RCP_TIME,   RCP,   C_TO_CO2),
+        ("SSP",   SSP_TIME,   SSP,   1.0),
+        ("CMIP7", CMIP7_TIME, cmip7_scenarios, 1.0),
+    ]
+
+    fig, ax = plt.subplots(figsize=(12, 7))
+    ax.axhline(0, color="black", lw=0.5, ls="--", alpha=0.3)
+
+    gen_labels = {
+        "SA90":  "SA90 (CMIP1, 1990)",
+        "IS92":  "IS92 (CMIP2, 1992)",
+        "SRES":  "SRES (CMIP3, 2000)",
+        "RCP":   "RCP (CMIP5, 2009)",
+        "SSP":   "SSP (CMIP6, 2016)",
+        "CMIP7": "ScenarioMIP-CMIP7 (2026)",
+    }
+
+    for gen, t, dct, conv in families:
+        if not dct:
+            continue
+        mean, p10, p90 = family_stats(t, dct, conv=conv)
+        c = GEN_COLORS[gen]
+        n = len(dct)
+        ax.fill_between(T_FINE, p10, p90, color=c, alpha=0.15)
+        ax.plot(T_FINE, mean, color=c, lw=2.5, label=f"{gen_labels[gen]} (n={n})")
+        # annotate the 2100 end-point with n-count
+        idx_2100 = np.argmin(np.abs(T_FINE - 2100))
+        yval = mean[idx_2100]
+        if not np.isnan(yval):
+            ax.text(2101, yval, f"{yval:.0f}", fontsize=7.5,
+                    va="center", color=c, fontweight="bold")
+
+    # historical
+    ax.plot(hist_years, hist_vals, color="black", lw=2.5, ls="-",
+            label="Historical (GCP/OWID)", zorder=10)
+
+    ax.set_xlim(1983, 2115)
+    ax.set_ylim(-30, 100)
+    ax.set_xlabel("Year", fontsize=11)
+    ax.set_ylabel("CO₂ emissions (Gt CO₂ yr⁻¹)", fontsize=11)
+    ax.set_title(
+        "Mean CO₂ emissions trajectory per CMIP scenario generation\n"
+        "(shading = 10th–90th percentile across all scenarios in each family)",
+        fontsize=11, pad=10,
+    )
+    ax.legend(loc="upper left", fontsize=8.5, framealpha=0.85, edgecolor="0.7")
+    ax.tick_params(labelsize=9)
+    ax.spines[["top", "right"]].set_visible(False)
+    fig.tight_layout()
+    return fig
+
+
 # ─── main ─────────────────────────────────────────────────────────────────────
 
 def main():
     cmip7 = fetch_cmip7()
     hist_years, hist_vals = fetch_historical()
-    fig = make_figure(cmip7, hist_years, hist_vals)
+
+    fig1 = make_figure(cmip7, hist_years, hist_vals)
     for ext in ("pdf", "svg", "png"):
         out = OUT_DIR / f"makeFig.{ext}"
-        fig.savefig(out, dpi=300, bbox_inches="tight")
+        fig1.savefig(out, dpi=300, bbox_inches="tight")
         print(f"Saved {out}")
-    plt.close(fig)
+    plt.close(fig1)
+
+    fig2 = make_figure_avg(cmip7, hist_years, hist_vals)
+    for ext in ("pdf", "svg", "png"):
+        out = OUT_DIR / f"makeFig_avg.{ext}"
+        fig2.savefig(out, dpi=300, bbox_inches="tight")
+        print(f"Saved {out}")
+    plt.close(fig2)
+
     print("Done.")
 
 
