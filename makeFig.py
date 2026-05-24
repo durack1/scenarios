@@ -384,6 +384,52 @@ def fetch_historical():
         vals = np.array([_HIST_FALLBACK[int(y)] for y in yrs])
         return yrs, vals
 
+# ─── CMIP-used scenario selection ────────────────────────────────────────────
+
+CMIP_USED = {
+    "SA90":  [],  # CMIP1: no specific scenarios prescribed
+    "IS92":  ["IS92a"],
+    "SRES":  ["A1B-AIM", "A2-ASF", "B1-IMAGE"],
+    "RCP":   ["RCP3-PD (2.6) - IMAGE", "RCP 4.5 - MiniCAM",
+               "RCP 6.0 - AIM", "RCP 8.5 - MESSAGE"],
+    "SSP":   [
+        "SSP1-19 - IMAGE",            # ssp119
+        "SSP1-26 - IMAGE",            # ssp126
+        "SSP2-45 - MESSAGE-GLOBIOM",  # ssp245
+        "SSP3-Baseline - AIM/CGE",    # ssp370
+        "SSP4-34 - GCAM4",            # ssp434
+        "SSP4-60 - GCAM4",            # ssp460
+        "SSP5-34 - REMIND-MAGPIE",    # ssp534-over
+        "SSP5-Baseline - REMIND-MAGPIE",  # ssp585
+    ],
+}
+
+CMIP_SHORT = {
+    "IS92a":                           "IS92a",
+    "A1B-AIM":                         "A1B",
+    "A2-ASF":                          "A2",
+    "B1-IMAGE":                        "B1",
+    "RCP3-PD (2.6) - IMAGE":           "RCP2.6",
+    "RCP 4.5 - MiniCAM":               "RCP4.5",
+    "RCP 6.0 - AIM":                   "RCP6.0",
+    "RCP 8.5 - MESSAGE":               "RCP8.5",
+    "SSP1-19 - IMAGE":                 "SSP1-1.9",
+    "SSP1-26 - IMAGE":                 "SSP1-2.6",
+    "SSP2-45 - MESSAGE-GLOBIOM":       "SSP2-4.5",
+    "SSP3-Baseline - AIM/CGE":         "SSP3-7.0",
+    "SSP4-34 - GCAM4":                 "SSP4-3.4",
+    "SSP4-60 - GCAM4":                 "SSP4-6.0",
+    "SSP5-34 - REMIND-MAGPIE":         "SSP5-3.4os",
+    "SSP5-Baseline - REMIND-MAGPIE":   "SSP5-8.5",
+    "high-extension":                  "high",
+    "high-overshoot":                  "hi-os",
+    "low":                             "low",
+    "medium-extension":                "med",
+    "medium-overshoot":                "med-os",
+    "verylow":                         "vlow",
+    "verylow-overshoot":               "vlow-os",
+}
+
 # ─── figure ───────────────────────────────────────────────────────────────────
 
 def make_figure(cmip7_scenarios, hist_years, hist_vals):
@@ -407,41 +453,33 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
                         color=GEN_COLORS[gen], alpha=0.10, zorder=0,
                         linewidth=0)
 
-    def plot_family(time, data_dict, markers, gen_key, conv=1.0):
-        c = GEN_COLORS[gen_key]
-        for name, raw_vals in data_dict.items():
-            y = interp(time, raw_vals) * conv
-            is_marker = name in markers
-            ax.plot(
-                T_FINE, y,
-                color=c,
-                lw=2.2 if is_marker else 0.5,
-                alpha=0.90 if is_marker else 0.22,
-                zorder=4 if is_marker else 2,
-                solid_capstyle="round",
-            )
-
-    # individual spaghetti lines on top of shading
-    plot_family(SA90_TIME, SA90,  SA90_MARKERS,  "SA90",  conv=C_TO_CO2)
-    plot_family(IS92_TIME, IS92,  IS92_MARKERS,  "IS92",  conv=C_TO_CO2)
-    plot_family(SRES_TIME, SRES,  SRES_MARKERS,  "SRES",  conv=C_TO_CO2)
-    plot_family(RCP_TIME,  RCP,   RCP_MARKERS,   "RCP",   conv=C_TO_CO2)
-    plot_family(SSP_TIME,  SSP,   SSP_MARKERS,   "SSP",   conv=1.0)
-
-    # CMIP7
-    c7 = GEN_COLORS["CMIP7"]
-    c7_marks = cmip7_markers(cmip7_scenarios)
-    for name, raw_vals in cmip7_scenarios.items():
-        y = interp(CMIP7_TIME, raw_vals)
-        is_m = name in c7_marks
-        ax.plot(
-            T_FINE, y,
-            color=c7,
-            lw=2.2 if is_m else 0.5,
-            alpha=0.90 if is_m else 0.22,
-            zorder=4 if is_m else 2,
-            solid_capstyle="round",
-        )
+    # ── CMIP-used scenario lines ─────────────────────────────────────────────
+    cmip_families = [
+        ("SA90",  SA90_TIME,  SA90,  C_TO_CO2, CMIP_USED["SA90"]),
+        ("IS92",  IS92_TIME,  IS92,  C_TO_CO2, CMIP_USED["IS92"]),
+        ("SRES",  SRES_TIME,  SRES,  C_TO_CO2, CMIP_USED["SRES"]),
+        ("RCP",   RCP_TIME,   RCP,   C_TO_CO2, CMIP_USED["RCP"]),
+        ("SSP",   SSP_TIME,   SSP,   1.0,       CMIP_USED["SSP"]),
+        ("CMIP7", CMIP7_TIME, cmip7_scenarios, 1.0,
+         list(cmip7_scenarios.keys())),
+    ]
+    for gen, t, dct, conv, selected in cmip_families:
+        c = GEN_COLORS[gen]
+        for name in selected:
+            if name not in dct:
+                print(f"  WARNING: {name!r} not found in {gen} data")
+                continue
+            y = interp(t, dct[name]) * conv
+            ax.plot(T_FINE, y, color=c, lw=2.0, alpha=0.92,
+                    zorder=4, solid_capstyle="round")
+            # end-of-line label at last valid point
+            valid = np.where(~np.isnan(y))[0]
+            if not len(valid):
+                continue
+            xi = valid[-1]
+            label = CMIP_SHORT.get(name, name)
+            ax.text(T_FINE[xi] + 1.0, y[xi], label,
+                    fontsize=7, va="center", color=c, fontweight="bold")
 
     # historical
     ax.plot(
@@ -451,66 +489,25 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
         label="Historical (GCP/OWID)",
     )
 
-    # ── labels on a few marker lines ────────────────────────────────────────
-    label_targets = {
-        "IS92e": ("IS92", IS92, IS92_TIME, C_TO_CO2, 2075),
-        "IS92c": ("IS92", IS92, IS92_TIME, C_TO_CO2, 2085),
-        "IS92a": ("IS92", IS92, IS92_TIME, C_TO_CO2, 2090),
-        "A1C-AIM": ("SRES", SRES, SRES_TIME, C_TO_CO2, 2095),
-        "B1T-MESSAGE": ("SRES", SRES, SRES_TIME, C_TO_CO2, 2090),
-        "RCP 8.5 - MESSAGE": ("RCP", RCP, RCP_TIME, C_TO_CO2, 2085),
-        "RCP3-PD (2.6) - IMAGE": ("RCP", RCP, RCP_TIME, C_TO_CO2, 2080),
-        "SSP5-Baseline - REMIND-MAGPIE": ("SSP", SSP, SSP_TIME, 1.0, 2095),
-        "SSP1-19 - IMAGE": ("SSP", SSP, SSP_TIME, 1.0, 2090),
-        "SSP2-45 - MESSAGE-GLOBIOM": ("SSP", SSP, SSP_TIME, 1.0, 2088),
-        "SA90: 2030 High Emissions": ("SA90", SA90, SA90_TIME, C_TO_CO2, 2095),
-        "SA90: Accelerated Policies": ("SA90", SA90, SA90_TIME, C_TO_CO2, 2095),
-    }
-    short_labels = {
-        "IS92e": "IS92e",
-        "IS92c": "IS92c",
-        "IS92a": "IS92a",
-        "A1C-AIM": "A1C",
-        "B1T-MESSAGE": "B1T",
-        "RCP 8.5 - MESSAGE": "RCP8.5",
-        "RCP3-PD (2.6) - IMAGE": "RCP2.6",
-        "SSP5-Baseline - REMIND-MAGPIE": "SSP5-BL",
-        "SSP1-19 - IMAGE": "SSP1-19",
-        "SSP2-45 - MESSAGE-GLOBIOM": "SSP2-45",
-        "SA90: 2030 High Emissions": "SA90-Hi",
-        "SA90: Accelerated Policies": "SA90-Lo",
-    }
-    for name, (gen, dct, t, conv, t_label) in label_targets.items():
-        y_vals = interp(t, dct[name]) * conv
-        idx = np.argmin(np.abs(T_FINE - t_label))
-        yval = y_vals[idx]
-        if np.isnan(yval):
-            continue
-        ax.text(
-            t_label + 1, yval, short_labels[name],
-            fontsize=7, va="center", color=GEN_COLORS[gen],
-            fontweight="bold",
-        )
-
     # ── "futures avoided / opportunities lost" annotations ───────────────────
     ax.annotate(
         "Futures\navoided",
-        xy=(2090, 110),
-        xytext=(2060, 125),
+        xy=(2085, 103),
+        xytext=(2058, 120),
         fontsize=9, ha="center", color="0.3", fontweight="bold",
         arrowprops=dict(arrowstyle="->", color="0.4", lw=1.2),
     )
     ax.annotate(
         "Opportunities\nlost",
-        xy=(2030, 14),
-        xytext=(2015, 5),
+        xy=(2035, 12),
+        xytext=(2018, 3),
         fontsize=9, ha="center", color="0.3", fontweight="bold",
         arrowprops=dict(arrowstyle="->", color="0.4", lw=1.2),
     )
 
     # ── generation legend ────────────────────────────────────────────────────
     gen_labels = {
-        "SA90":  "SA90 (CMIP1, 1990)",
+        "SA90":  "SA90 (CMIP1, 1990) — range only",
         "IS92":  "IS92 (CMIP2, 1992)",
         "SRES":  "SRES (CMIP3, 2000)",
         "RCP":   "RCP (CMIP5, 2009)",
