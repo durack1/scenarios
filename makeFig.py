@@ -390,6 +390,23 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
     fig, ax = plt.subplots(figsize=(15, 8))
     ax.axhline(0, color="black", lw=0.5, ls="--", alpha=0.3, zorder=1)
 
+    # ── shaded p10–p90 bands per generation (drawn first, lowest z-order) ────
+    shade_families = [
+        ("SA90",  SA90_TIME,  SA90,  C_TO_CO2),
+        ("IS92",  IS92_TIME,  IS92,  C_TO_CO2),
+        ("SRES",  SRES_TIME,  SRES,  C_TO_CO2),
+        ("RCP",   RCP_TIME,   RCP,   C_TO_CO2),
+        ("SSP",   SSP_TIME,   SSP,   1.0),
+        ("CMIP7", CMIP7_TIME, cmip7_scenarios, 1.0),
+    ]
+    for gen, t, dct, conv in shade_families:
+        if not dct:
+            continue
+        _, p10, p90 = family_stats(t, dct, conv=conv)
+        ax.fill_between(T_FINE, p10, p90,
+                        color=GEN_COLORS[gen], alpha=0.10, zorder=0,
+                        linewidth=0)
+
     def plot_family(time, data_dict, markers, gen_key, conv=1.0):
         c = GEN_COLORS[gen_key]
         for name, raw_vals in data_dict.items():
@@ -404,7 +421,7 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
                 solid_capstyle="round",
             )
 
-    # background spaghetti then markers — same call handles both via alpha/lw
+    # individual spaghetti lines on top of shading
     plot_family(SA90_TIME, SA90,  SA90_MARKERS,  "SA90",  conv=C_TO_CO2)
     plot_family(IS92_TIME, IS92,  IS92_MARKERS,  "IS92",  conv=C_TO_CO2)
     plot_family(SRES_TIME, SRES,  SRES_MARKERS,  "SRES",  conv=C_TO_CO2)
