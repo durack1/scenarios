@@ -518,9 +518,10 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
         col = col[~np.isnan(col)]
         if not len(col):
             continue
-        p10 = np.percentile(col, 10)
-        p50 = np.percentile(col, 50)
-        p90 = np.percentile(col, 90)
+        p10  = np.percentile(col, 10)
+        p50  = np.percentile(col, 50)
+        p90  = np.percentile(col, 90)
+        mean = np.mean(col)
         c = GEN_COLORS[gen]
         bx = bar_x[gen]
         ax.plot([bx, bx], [p10, p90], color=c, lw=1.5, zorder=5,
@@ -529,6 +530,8 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
         ax.plot([bx - tick_hw, bx + tick_hw], [p90, p90], color=c, lw=1.5, zorder=5)
         ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [p50, p50],
                 color=c, lw=1.5, zorder=5)
+        ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [mean, mean],
+                color=c, lw=1.5, ls="--", zorder=5)
 
     # ── "futures avoided / opportunities lost" annotations ───────────────────
     ax.annotate(
