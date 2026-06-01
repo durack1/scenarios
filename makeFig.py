@@ -432,10 +432,10 @@ CMIP_SHORT = {
 
 # y-offsets (GtCO2) for end-of-line labels that would otherwise overlap
 _LABEL_Y_OFFSET = {
-    "IS92a":  +4.5,   # sits just above CMIP7 "high"
-    "high":   -4.5,   # sits just below IS92a
-    "A2":     +4.5,   # sits just above RCP8.5
-    "RCP8.5": -4.5,   # sits just below A2
+    "IS92a":  +2.5,   # sits just above CMIP7 "high"
+    "high":   -2.5,   # sits just below IS92a
+    "A2":     +2.5,   # sits just above RCP8.5
+    "RCP8.5": -2.5,   # sits just below A2
 }
 
 # ─── figure ───────────────────────────────────────────────────────────────────
@@ -554,8 +554,8 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
     lx = 2113.5  # label x, just right of the rightmost bar
     ax.text(2108, 140, "at 2100", fontsize=7, color="0.4",
             ha="center", va="bottom", style="italic")
-    p90_label_y = p90 - 5.0 if abs(p90 - hi) < 3 else p90
-    p10_label_y = p10 + 5.0 if abs(p10 - lo) < 3 else p10
+    p90_label_y = p90 - 3.0 if abs(p90 - hi) < 3 else p90
+    p10_label_y = p10 + 3.0 if abs(p10 - lo) < 3 else p10
     ax.text(lx, hi,          "max",    fontsize=6.5, color="0.45", va="center")
     ax.text(lx, p90_label_y, "p90",    fontsize=6.5, color="0.45", va="center", alpha=0.7)
     ax.text(lx, p50,         "median", fontsize=6.5, color="0.45", va="center")
