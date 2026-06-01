@@ -543,8 +543,8 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
     )
     ax.annotate(
         "Opportunities\nlost",
-        xy=(2035, 12),
-        xytext=(2018, 3),
+        xy=(2026, 37),
+        xytext=(2010, 18),
         fontsize=9, ha="center", color="0.3", fontweight="bold",
         arrowprops=dict(arrowstyle="->", color="0.4", lw=1.2),
     )
