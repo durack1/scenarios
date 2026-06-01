@@ -139,21 +139,33 @@ As specified CMIP3 experiments were completed by early 2007, urgent detection-an
 
 ## Part 4 — The RCP Revolution and the Fifth Assessment Report (2007–2014)
 
+### From IPCC Commissioner to IAM Community Owner
+
+Throughout the SA90, IS92, and SRES generations, the IPCC had been the **commissioning authority** for scenario development. It convened expert groups, defined the scope, and published the results as IPCC products. The IAM modelling teams were service providers to this process, not its architects.
+
+By the mid-2000s this arrangement was under strain from several directions. The SRES had attracted substantive criticism: its **no-policy baseline assumption** was increasingly difficult to defend as the Kyoto Protocol took effect; its **forward-looking storyline logic** (define socioeconomic world → derive emissions) produced scenarios that could take years to develop and were hard to update; and the long sequential lag from scenario commissioning to IPCC publication — potentially a decade — left climate modellers working with outdated inputs. The SRES scenarios were also not anchored to specific radiative forcing or temperature outcomes, making it awkward to design targeted mitigation analyses.
+
+In **2007 an IPCC Expert Meeting at Noordwijkerhout, Netherlands** concluded that the sequential, IPCC-led process was no longer fit for purpose and called for a new approach (Moss *et al.* [2008](#moss2008)). The meeting's key recommendation was that the IAM community itself — not the IPCC — should take ownership of scenario development, working in parallel with climate modellers rather than upstream of them.
+
+The institutional response was immediate: also in **2007**, **John Weyant** (Stanford Energy Modeling Forum), **Nebojša Nakicenović** (IIASA) and **Mikiko Kainuma** (National Institute for Environmental Studies, Japan) invited other research organisations to join the newly formed **Integrated Assessment Modelling Consortium (IAMC)**, which first convened in September 2008 ([IAMC](#iamc)). The IAMC's founding mandate was explicitly to organise the IAM research community to deliver the next generation of scenarios — the Representative Concentration Pathways — for use by the climate modelling community in CMIP5. This was a qualitative shift: for the first time, scenario development was not commissioned by the IPCC but led by an independent scientific consortium that the IPCC then adopted.
+
+The broader framing of this ownership transfer — and the conceptual architecture needed to reunite it with socioeconomic dimensions — was subsequently developed by Kriegler *et al.* ([2012](#kriegler2012)) and O'Neill *et al.* ([2014](#oneill2014)), laying the groundwork for the SSP framework that would follow.
+
 ### A Parallel Process
 
-By the mid-2000s, the sequential process linking scenario development → climate modelling → IPCC assessment had become a significant bottleneck. From the commissioning of new scenarios to their appearance in an IPCC assessment report could take a decade. Moreover, the SRES framework — which produced emissions trajectories from socioeconomic assumptions — meant that the connection between emissions and their climate outcomes (radiative forcing, temperature) was indirect and model-dependent.
-
-A **landmark Aspen Global Change Institute (AGCI) session in August 2006** brought together climate modellers, IAM scientists, and impacts researchers to formulate CMIP5 (Durack *et al.* [2025](#durack2025)). This session produced a plan for a fundamentally new approach to scenario development, described in the landmark paper: **Moss *et al.* ([2010](#moss2010))** — "The next generation of scenarios for climate change research and assessment," *Nature* 463, 747–756. The CMIP5 experiment design was approved by the WGCM in **2008** (Durack *et al.* [2025](#durack2025)), with operations beginning in 2011.
-
-The key innovations of the new parallel process were:
+The new process, described in the landmark paper **Moss *et al.* ([2010](#moss2010))** — "The next generation of scenarios for climate change research and assessment," *Nature* 463, 747–756 — reversed the SRES logic in three fundamental ways:
 
 1. **Target-first**: Rather than starting with socioeconomic assumptions and deriving emissions, the new process started with **radiative forcing targets** — the Representative Concentration Pathways (RCPs) — and worked backwards. Multiple socioeconomic storylines could arrive at the same forcing level, cleanly separating the physical climate problem from the socioeconomic one.
 
-2. **Parallel development**: IAM modellers, climate modellers, and impacts researchers all began work simultaneously on a common set of targets, rather than waiting for each upstream step to complete. This was the first time the Earth System Modelling community connected formally with the Integrated Assessment Modelling community to agree on new future emission scenarios (Moss *et al.* [2008](https://www.ipcc.ch/site/assets/uploads/2018/05/expert-meeting-report-scenarios-1.pdf); Durack *et al.* [2025](#durack2025)).
+2. **Parallel development**: IAM modellers, climate modellers, and impacts researchers all began work simultaneously on a common set of targets, rather than waiting for each upstream step to complete. This was the first time the Earth System Modelling community connected formally with the Integrated Assessment Modelling community to agree on new future emission scenarios (Durack *et al.* [2025](#durack2025)).
 
 3. **Speed**: The gap between scenario definition and their use in CMIP5 simulations was compressed from a decade to a few years.
 
-### The Four RCPs
+A **landmark AGCI session in August 2006** had already brought together climate modellers, IAM scientists, and impacts researchers to formulate CMIP5 (Durack *et al.* [2025](#durack2025)), and the CMIP5 experiment design was approved by the WGCM in **2008**, with operations beginning in 2011.
+
+### The Four RCPs — A Curated Subset of the IAM Literature
+
+The four RCPs adopted for CMIP5 were **not newly constructed**. The process began with a survey of the published IAM scenario literature, from which approximately **~30 candidate scenarios** were identified as providing sufficient information on all key factors affecting radiative forcing (GHG emissions, aerosol precursors, land use). From this pool, four were selected as "representative" on a single criterion: they **span the full range of forcing levels found in the literature**, from strong mitigation (~2.6 W/m²) to high emissions (~8.5 W/m²) (Moss *et al.* [2010](#moss2010); van Vuuren *et al.* [2011](#vanvuuren2011)). Each selected pathway was an existing published study from a different IAM group — none were purpose-built for CMIP5. The IIASA RCP Database hosted the full broader candidate suite alongside the four selected pathways.
 
 Four pathways were selected, spanning the range of published literature from stringent mitigation to business-as-usual, and described in a dedicated special issue of *Climatic Change* (2011) with an overview by van Vuuren *et al.* ([2011](#vanvuuren2011)):
 
@@ -342,8 +354,20 @@ This evolution — from disconnected activities to a co-designed international p
 <a id="girod2009"></a>
 **Girod, B., Wiek, A., Mieg, H., and Hulme, M. (2009):** The evolution of the IPCC's emissions scenarios. *Environmental Science & Policy* 12(2), 103–118. doi:[10.1016/j.envsci.2008.12.006](https://doi.org/10.1016/j.envsci.2008.12.006)
 
+<a id="moss2008"></a>
+**Moss, R., Babiker, M., Brinkman, S., Calvo, E., Carter, T., Edmonds, J., *et al.* (2008):** Towards New Scenarios for Analysis of Emissions, Climate Change, Impacts and Response Strategies. IPCC Expert Meeting Report, Noordwijkerhout, Netherlands, 19–21 September 2007. Geneva: IPCC. [PDF](https://www.ipcc.ch/site/assets/uploads/2018/05/expert-meeting-report-scenarios-1.pdf)
+
 <a id="moss2010"></a>
 **Moss, R.H., Edmonds, J.A., Hibbard, K.A., Manning, M.R., Rose, S.K., van Vuuren, D.P., Carter, T.R., Emori, S., Kainuma, M., Kram, T., Meehl, G.A., Mitchell, J.F.B., Nakicenovic, N., Riahi, K., Smith, S.J., Stouffer, R.J., Thomson, A.M., Weyant, J.P., and Wilbanks, T.J. (2010):** The next generation of scenarios for climate change research and assessment. *Nature* 463, 747–756. doi:[10.1038/nature08823](https://doi.org/10.1038/nature08823)
+
+<a id="iamc"></a>
+**IAMC — Integrated Assessment Modelling Consortium (founded 2007; first convened September 2008):** Led by J. Weyant (Stanford EMF), N. Nakicenović (IIASA), and M. Kainuma (NIES Japan). Established in direct response to the IPCC's call at the 2007 Noordwijkerhout Expert Meeting for an independent organisation to lead community scenario development. [iamconsortium.org](https://www.iamconsortium.org/about-us/)
+
+<a id="kriegler2012"></a>
+**Kriegler, E., O'Neill, B.C., Hallegatte, S., Kram, T., Lempert, R.J., Moss, R.H., and Wilbanks, T. (2012):** The need for and use of socio-economic scenarios for climate change analysis: a new approach based on shared socio-economic pathways. *Global Environmental Change* 22(4), 807–822. doi:[10.1016/j.gloenvcha.2012.05.002](https://doi.org/10.1016/j.gloenvcha.2012.05.002)
+
+<a id="oneill2014"></a>
+**O'Neill, B.C., Kriegler, E., Riahi, K., Ebi, K.L., Hallegatte, S., Carter, T.R., Mathur, R., and van Vuuren, D.P. (2014):** A new scenario framework for climate change research: the concept of shared socioeconomic pathways. *Climatic Change* 122, 387–400. doi:[10.1007/s10584-013-0905-2](https://doi.org/10.1007/s10584-013-0905-2)
 
 <a id="vanvuuren2011"></a>
 **van Vuuren, D.P., Edmonds, J., Kainuma, M., Riahi, K., Thomson, A., Hibbard, K., Hurtt, G.C., Kram, T., Krey, V., Lamarque, J.-F., Masui, T., Meinshausen, M., Nakicenovic, N., Smith, S.J., and Rose, S.K. (2011):** The representative concentration pathways: an overview. *Climatic Change* 109, 5–31. doi:[10.1007/s10584-011-0148-z](https://doi.org/10.1007/s10584-011-0148-z)
