@@ -520,7 +520,9 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
             continue
         lo   = col.min()
         hi   = col.max()
+        p10  = np.percentile(col, 10)
         p50  = np.percentile(col, 50)
+        p90  = np.percentile(col, 90)
         mean = np.mean(col)
         c = GEN_COLORS[gen]
         bx = bar_x[gen]
@@ -528,10 +530,14 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
                 solid_capstyle="round")
         ax.plot([bx - tick_hw, bx + tick_hw], [lo, lo], color=c, lw=1.5, zorder=5)
         ax.plot([bx - tick_hw, bx + tick_hw], [hi, hi], color=c, lw=1.5, zorder=5)
+        ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [p90, p90],
+                color=c, lw=1.5, zorder=5, alpha=0.5)
         ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [p50, p50],
                 color=c, lw=1.5, zorder=5)
         ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [mean, mean],
                 color=c, lw=1.5, ls="--", zorder=5)
+        ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [p10, p10],
+                color=c, lw=1.5, zorder=5, alpha=0.5)
         ax.text(bx, hi + 2.5, f"n={len(col)}", fontsize=6.5,
                 color=c, ha="center", va="bottom", fontweight="bold")
 
@@ -540,8 +546,10 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
     ax.text(2108, 140, "at 2100", fontsize=7, color="0.4",
             ha="center", va="bottom", style="italic")
     ax.text(lx, hi,   "max",    fontsize=6.5, color="0.45", va="center")
+    ax.text(lx, p90,  "p90",    fontsize=6.5, color="0.45", va="center", alpha=0.7)
     ax.text(lx, p50,  "median", fontsize=6.5, color="0.45", va="center")
     ax.text(lx, mean, "mean --",fontsize=6.5, color="0.45", va="center")
+    ax.text(lx, p10,  "p10",    fontsize=6.5, color="0.45", va="center", alpha=0.7)
     ax.text(lx, lo,   "min",    fontsize=6.5, color="0.45", va="center")
 
     # ── "futures avoided / opportunities lost" annotations ───────────────────
