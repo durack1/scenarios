@@ -659,16 +659,17 @@ def make_figure_avg(cmip7_scenarios, hist_years, hist_vals):
         "CMIP7": "ScenarioMIP (IPCC AR7 / CMIP7, 2026)",
     }
 
+    idx_2100 = np.argmin(np.abs(T_FINE - 2100))
+
     for gen, t, dct, conv in families:
         if not dct:
             continue
-        mean, p10, p90 = family_stats(t, dct, conv=conv)
+        mean, lo, hi = family_stats(t, dct, conv=conv)
         c = GEN_COLORS[gen]
         n = len(dct)
-        ax.fill_between(T_FINE, p10, p90, color=c, alpha=0.15)
+        ax.fill_between(T_FINE, lo, hi, color=c, alpha=0.15)
         ax.plot(T_FINE, mean, color=c, lw=2.5, label=f"{gen_labels[gen]} (n={n})")
-        # annotate the 2100 end-point with n-count
-        idx_2100 = np.argmin(np.abs(T_FINE - 2100))
+        # annotate the 2100 end-point mean value
         yval = mean[idx_2100]
         if not np.isnan(yval):
             ax.text(2101, yval, f"{yval:.0f}", fontsize=7.5,
@@ -678,7 +679,56 @@ def make_figure_avg(cmip7_scenarios, hist_years, hist_vals):
     ax.plot(hist_years, hist_vals, color="black", lw=2.5, ls="-",
             label="Historical (GCP/OWID)", zorder=10)
 
-    ax.set_xlim(1983, 2115)
+    # ── right-side 2100 summary bars ─────────────────────────────────────────
+    ax.axvline(2102.5, color="0.75", lw=0.8, ls=":", zorder=1)
+    bar_x = {"SA90": 2104.5, "IS92": 2106, "SRES": 2107.5,
+              "RCP": 2109, "SSP": 2110.5, "CMIP7": 2112}
+    tick_hw = 0.55
+    for gen, t, dct, conv in families:
+        if not dct:
+            continue
+        matrix = np.array([interp(t, vals) * conv for vals in dct.values()])
+        col = matrix[:, idx_2100]
+        col = col[~np.isnan(col)]
+        if not len(col):
+            continue
+        lo   = col.min()
+        hi   = col.max()
+        p10  = np.percentile(col, 10)
+        p50  = np.percentile(col, 50)
+        p90  = np.percentile(col, 90)
+        mean = np.mean(col)
+        c = GEN_COLORS[gen]
+        bx = bar_x[gen]
+        ax.plot([bx, bx], [lo, hi], color=c, lw=1.5, zorder=5,
+                solid_capstyle="round")
+        ax.plot([bx - tick_hw, bx + tick_hw], [lo, lo], color=c, lw=1.5, zorder=5)
+        ax.plot([bx - tick_hw, bx + tick_hw], [hi, hi], color=c, lw=1.5, zorder=5)
+        ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [p90, p90],
+                color=c, lw=1.5, zorder=5, alpha=0.5)
+        ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [p50, p50],
+                color=c, lw=1.5, zorder=5)
+        ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [mean, mean],
+                color=c, lw=1.5, ls="--", zorder=5)
+        ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [p10, p10],
+                color=c, lw=1.5, zorder=5, alpha=0.5)
+        ax.text(bx, hi + 2.5, f"n={len(col)}", fontsize=6.5,
+                color=c, ha="center", va="bottom", fontweight="bold")
+
+    # reference labels on rightmost bar (CMIP7)
+    lx = 2113.5
+    p90_label_y = p90 - 3.0 if abs(p90 - hi) < 3 else p90
+    p10_label_y = p10 + 3.0 if abs(p10 - lo) < 3 else p10
+    ax.text(2108, 140, "at 2100", fontsize=7, color="0.4",
+            ha="center", va="bottom", style="italic")
+    ax.text(lx, hi,          "max",     fontsize=6.5, color="0.45", va="center")
+    ax.text(lx, p90_label_y, "p90",     fontsize=6.5, color="0.45", va="center", alpha=0.7)
+    ax.text(lx, p50,         "median",  fontsize=6.5, color="0.45", va="center")
+    ax.text(lx, mean,        "mean --", fontsize=6.5, color="0.45", va="center")
+    ax.text(lx, p10_label_y, "p10",     fontsize=6.5, color="0.45", va="center", alpha=0.7)
+    ax.text(lx, lo,          "min",     fontsize=6.5, color="0.45", va="center")
+
+    ax.set_xlim(1983, 2118)
     ax.set_ylim(-35, 145)
     ax.set_xlabel("Year", fontsize=11)
     ax.set_ylabel("CO₂ emissions (Gt CO₂ yr⁻¹)", fontsize=11)
