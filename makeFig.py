@@ -683,7 +683,7 @@ def make_figure_avg(cmip7_scenarios, hist_years, hist_vals):
     ax.set_xlabel("Year", fontsize=11)
     ax.set_ylabel("CO₂ emissions (Gt CO₂ yr⁻¹)", fontsize=11)
     ax.set_title(
-        "Mean CO₂ emissions trajectory per CMIP scenario generation\n"
+        "Mean CO₂ emissions trajectory per IPCC and CMIP scenario generation\n"
         "(shading = full scenario range across all scenarios in each family)",
         fontsize=11, pad=10,
     )
