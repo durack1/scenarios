@@ -545,8 +545,8 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
     # ── "futures avoided / opportunities lost" annotations ───────────────────
     ax.annotate(
         "Futures\navoided",
-        xy=(2085, 103),
-        xytext=(2058, 120),
+        xy=(2090, 110),
+        xytext=(2063, 128),
         fontsize=9, ha="center", color="0.3", fontweight="bold",
         arrowprops=dict(arrowstyle="->", color="0.4", lw=1.2),
     )
@@ -588,7 +588,7 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
     ax.set_xlabel("Year", fontsize=11)
     ax.set_ylabel("CO₂ emissions (Gt CO₂ yr⁻¹)", fontsize=11)
     ax.set_title(
-        "CO₂ emissions trajectories across CMIP scenario generations\n"
+        "CO₂ emissions trajectories across IPCC and CMIP scenario generations\n"
         "\"Futures avoided, opportunities lost\"",
         fontsize=12,
         pad=10,
