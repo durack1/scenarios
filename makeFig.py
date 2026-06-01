@@ -512,7 +512,7 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
         hist_years, hist_vals,
         color="black", lw=2.5, ls="-", zorder=10,
         solid_capstyle="round",
-        label="Historical (GCP/OWID)",
+        label="Historical (Global Carbon Project)",
     )
 
     # ── right-side 2100 summary bars ─────────────────────────────────────────
@@ -594,7 +594,7 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
         for k, v in gen_labels.items()
     ]
     patches.append(
-        plt.Line2D([0], [0], color="black", lw=2.5, label="Historical (GCP/OWID)")
+        plt.Line2D([0], [0], color="black", lw=2.5, label="Historical (Global Carbon Project)")
     )
     ax.legend(
         handles=patches,
@@ -677,7 +677,7 @@ def make_figure_avg(cmip7_scenarios, hist_years, hist_vals):
 
     # historical
     ax.plot(hist_years, hist_vals, color="black", lw=2.5, ls="-",
-            label="Historical (GCP/OWID)", zorder=10)
+            label="Historical (Global Carbon Project)", zorder=10)
 
     # ── right-side 2100 summary bars ─────────────────────────────────────────
     ax.axvline(2102.5, color="0.75", lw=0.8, ls=":", zorder=1)
