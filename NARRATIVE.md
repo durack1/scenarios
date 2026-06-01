@@ -15,6 +15,8 @@ This is the story of **futures avoided, and opportunities lost**.
 
 The figure accompanying this document captures that story quantitatively: the CO₂ emissions envelope has shifted downward with each scenario generation, from the alarming trajectories of the 1990s to the more constrained — but still challenging — pathways of the 2020s. The retrospective assessments of Girod *et al.* ([2009](#girod2009)) and Pederson *et al.* ([2021](#pederson2021)) provide quantitative evaluations of how well each scenario generation tracked observed emissions. The comprehensive review of the CMIP programme by Durack *et al.* ([2025](#durack2025)) provides authoritative dates and details for each MIP phase, and Meehl ([2023](#meehl2023)) documents the symbiotic relationship between CMIP and the IPCC assessment cycle.
 
+Embedded within this downward shift is a pivotal, qualitative milestone: for the first nineteen years of IPCC scenario development — across SA90, IS92, and SRES — every scenario, even the most ambitious, projected **positive** CO₂ emissions at 2100. The world's lowest plausible futures still emitted carbon. That changed irrevocably with RCP2.6 in 2009, the first scenario used to drive CMIP simulations that required **net removal** of CO₂ from the atmosphere by century's end (−1.5 GtCO₂ yr⁻¹ at 2100). By the SSP generation, multiple scenarios require net-negative emissions, with the deepest reaching −16 GtCO₂ yr⁻¹. This crossing of zero is the quantitative signature of opportunities lost: what was once achievable by slowing emissions now requires actively undoing them.
+
 ---
 
 ## Part 1 — The First Assessment Report and SA90 Scenarios (1990)
@@ -162,6 +164,8 @@ Four pathways were selected, spanning the range of published literature from str
 
 The RCPs covered approximately the same radiative forcing range as SRES but were defined by their **outcome** (radiative forcing level) rather than their **process** (socioeconomic storyline), allowing a clean separation of the physical climate system response from the socioeconomic assumptions (Moss *et al.* [2010](#moss2010)).
 
+A landmark in the history of climate scenarios is visible in that table. RCP2.6 — the first mitigation pathway ever included in a CMIP phase — has a 2100 CO₂ value of **−1.5 GtCO₂ yr⁻¹**: net-negative. Every scenario in every prior generation (SA90, IS92, SRES) had positive emissions at 2100; even the SA90 Accelerated Policies scenario, the most ambitious constructed to that point, still emitted ~10 GtCO₂ yr⁻¹. RCP2.6 crossed zero for the first time, signalling that limiting warming to approximately 2°C — a goal that had been assumed achievable by reducing emissions — now required **large-scale removal of CO₂ from the atmosphere** through technologies such as bioenergy with carbon capture and storage (BECCS) and direct air capture (van Vuuren *et al.* [2011](#vanvuuren2011)). This was not a modelling choice; it was an arithmetical consequence of the emissions accumulated since 1990. The window for achieving stabilisation through reduction alone had closed.
+
 ### CMIP5 and AR5
 
 **CMIP5** (Taylor *et al.* [2012](#taylor2012)) was designed from the outset around the four RCPs. This co-design — where the scenario framework and the model experiment protocol were developed jointly — represented the first significant tightening of the connection between scenario development and climate modelling relative to all prior CMIP phases. Over 20 modelling groups ran CMIP5 simulations across the four RCPs, producing the multi-model ensemble used in the **Fifth Assessment Report (AR5, [IPCC 2013](#ipcc2013))**.
@@ -250,14 +254,21 @@ These high-end futures have been avoided — not because climate policy has been
 
 **Opportunities Lost**
 
-The low end of the scenario range has shifted in a more concerning direction:
-- **SA90 Accelerated Policies (1990)** showed that action from 1990 could hold emissions to ~10 GtCO₂ yr⁻¹ by 2100 from a ~22 GtCO₂ yr⁻¹ baseline (Tirpak and Vellinga [1990](#tirpak1990))
-- **IS92c (1992)** — the low-end scenario — projected ~17 GtCO₂ yr⁻¹ by 2100 (Leggett *et al.* [1992](#leggett1992))
-- **SRES B1 (2000)** projected ~15–20 GtCO₂ yr⁻¹ by 2100 even without any explicit climate policy (Nakicenovic and Swart [2000](#nakicenovic2000))
-- **RCP2.6 (2009)** required net-negative emissions by 2100 (~–0.4 GtCO₂ yr⁻¹) to limit warming to ~2°C — the first low scenario to include large-scale carbon dioxide removal (van Vuuren *et al.* [2011](#vanvuuren2011))
-- **SSP1-1.9 (2016)** requires rapid and deep decarbonisation reaching net-negative emissions well before 2060, combined with aggressive near-term action (Riahi *et al.* [2017](#riahi2017))
+The low end of the scenario range traces the most sobering arc in the entire figure, and its most important feature is a single threshold: **zero**.
 
-Each successive generation of low scenarios has required **deeper, faster, and earlier action** to achieve a given temperature outcome. The 1.5°C pathway was once thought achievable through broad near-term policy action; by 2026 it requires both massive near-term mitigation and significant negative emissions later this century. As Pederson *et al.* ([2021](#pederson2021)) document, observed emissions have consistently exceeded the central scenarios of each generation — the emissions budget compatible with 1.5°C has been largely spent.
+From 1990 to 2000 — across SA90, IS92, and SRES — every low-end scenario projected *positive* CO₂ emissions at 2100. The ambition of each generation was to slow or limit the *growth* of emissions:
+- **SA90 Accelerated Policies (1990)**: ~10 GtCO₂ yr⁻¹ at 2100, from a ~22 GtCO₂ yr⁻¹ baseline — achievable, the scenario implied, by strong policy beginning immediately (Tirpak and Vellinga [1990](#tirpak1990))
+- **IS92c (1992)**: ~17 GtCO₂ yr⁻¹ at 2100 — a world of low population and low growth, but still emitting (Leggett *et al.* [1992](#leggett1992))
+- **SRES B1-IMAGE (2000)**: ~16 GtCO₂ yr⁻¹ at 2100 — and critically, this was a *no-policy* baseline; a world that decarbonised naturally through service-economy transitions, not through climate legislation (Nakicenovic and Swart [2000](#nakicenovic2000))
+
+Then, in 2009, RCP2.6 crossed zero: **−1.5 GtCO₂ yr⁻¹ at 2100** (van Vuuren *et al.* [2011](#vanvuuren2011)). This was not a modelling refinement — it was a qualitative rupture. For the first time in thirty years of scenario-making, the lowest plausible future required humanity to *remove* more CO₂ from the atmosphere than it emitted. The window for achieving climate stabilisation through emissions reductions alone had closed. Large-scale carbon dioxide removal (CDR) — through bioenergy with carbon capture and storage (BECCS), direct air capture, or other means — was now a structural requirement of any pathway compatible with ~2°C.
+
+By the SSP generation, the zero-crossing had deepened into a chasm:
+- **SSP1-2.6** (IMAGE): −8.3 GtCO₂ yr⁻¹ at 2100
+- **SSP1-1.9** (IMAGE): −14.3 GtCO₂ yr⁻¹ at 2100 — requiring net-negative emissions well before 2060, sustained for decades (Riahi *et al.* [2017](#riahi2017))
+- **SSP4-3.4** (GCAM4): −16.0 GtCO₂ yr⁻¹ at 2100 — the deepest removal pathway in the CMIP6 ensemble
+
+Each successive generation of low scenarios has required **deeper, faster, and earlier action** to achieve a given temperature outcome. The 1.5°C pathway that was considered feasible from near-term action in the early 2000s now demands both massive immediate mitigation and decades of large-scale CDR — technologies that remain uncertain, costly, and contested. As Pederson *et al.* ([2021](#pederson2021)) document, observed emissions have consistently tracked in the *upper* portion of each generation's scenario range, not the lower. The emissions budget compatible with 1.5°C has been largely spent, and the cost of the delay is written in the deepening negativity of the low-end scenarios: each year of inaction shifts what "ambitious" requires further below zero.
 
 ### The Tightening Institutional Connection
 
