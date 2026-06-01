@@ -10,6 +10,7 @@ Usage:
 
 import csv
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 import matplotlib
@@ -699,17 +700,21 @@ def main():
     cmip7 = fetch_cmip7()
     hist_years, hist_vals = fetch_historical()
 
+    prefix = date.today().strftime("%y%m%d")
+
     fig1 = make_figure(cmip7, hist_years, hist_vals)
     for ext in ("pdf", "svg", "png"):
-        out = OUT_DIR / f"makeFig.{ext}"
-        fig1.savefig(out, dpi=300, bbox_inches="tight")
-        print(f"Saved {out}")
+        for stem in (f"{prefix}_scenariosThroughTime", "scenariosThroughTime"):
+            out = OUT_DIR / f"{stem}.{ext}"
+            fig1.savefig(out, dpi=300, bbox_inches="tight")
+            print(f"Saved {out}")
     plt.close(fig1)
 
     fig2 = make_figure_avg(cmip7, hist_years, hist_vals)
     for ext in ("pdf", "svg", "png"):
-        out = OUT_DIR / f"makeFig_avg.{ext}"
-        fig2.savefig(out, dpi=300, bbox_inches="tight")
+        for stem in (f"{prefix}_scenariosThroughTime_avg", "scenariosThroughTime_avg"):
+            out = OUT_DIR / f"{stem}.{ext}"
+            fig2.savefig(out, dpi=300, bbox_inches="tight")
         print(f"Saved {out}")
     plt.close(fig2)
 
