@@ -551,12 +551,12 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
 
     # ── generation legend ────────────────────────────────────────────────────
     gen_labels = {
-        "SA90":  "SA90 (CMIP1, 1990) — range only",
-        "IS92":  "IS92 (CMIP2, 1992)",
-        "SRES":  "SRES (CMIP3, 2000)",
-        "RCP":   "RCP (CMIP5, 2009)",
-        "SSP":   "SSP (CMIP6, 2016)",
-        "CMIP7": "ScenarioMIP-CMIP7 (2026)",
+        "SA90":  "SA90 (IPCC FAR, 1990) — range only",
+        "IS92":  "IS92 (IPCC SAR, 1992)",
+        "SRES":  "SRES (IPCC AR4 / CMIP3, 2000)",
+        "RCP":   "RCP (IPCC AR5 / CMIP5, 2009)",
+        "SSP":   "SSP (IPCC AR6 / CMIP6, 2016)",
+        "CMIP7": "ScenarioMIP (IPCC AR7 / CMIP7, 2026)",
     }
     patches = [
         mpatches.Patch(color=GEN_COLORS[k], label=v)
@@ -620,12 +620,12 @@ def make_figure_avg(cmip7_scenarios, hist_years, hist_vals):
     ax.axhline(0, color="black", lw=0.5, ls="--", alpha=0.3)
 
     gen_labels = {
-        "SA90":  "SA90 (CMIP1, 1990)",
-        "IS92":  "IS92 (CMIP2, 1992)",
-        "SRES":  "SRES (CMIP3, 2000)",
-        "RCP":   "RCP (CMIP5, 2009)",
-        "SSP":   "SSP (CMIP6, 2016)",
-        "CMIP7": "ScenarioMIP-CMIP7 (2026)",
+        "SA90":  "SA90 (IPCC FAR, 1990)",
+        "IS92":  "IS92 (IPCC SAR, 1992)",
+        "SRES":  "SRES (IPCC AR4 / CMIP3, 2000)",
+        "RCP":   "RCP (IPCC AR5 / CMIP5, 2009)",
+        "SSP":   "SSP (IPCC AR6 / CMIP6, 2016)",
+        "CMIP7": "ScenarioMIP (IPCC AR7 / CMIP7, 2026)",
     }
 
     for gen, t, dct, conv in families:
