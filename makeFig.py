@@ -532,6 +532,8 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
                 color=c, lw=1.5, zorder=5)
         ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [mean, mean],
                 color=c, lw=1.5, ls="--", zorder=5)
+        ax.text(bx, p90 + 2.5, f"n={len(col)}", fontsize=6.5,
+                color=c, ha="center", va="bottom", fontweight="bold")
 
     # ── summary bar legend ────────────────────────────────────────────────────
     lx = 2113.5  # label x, just right of the rightmost bar
