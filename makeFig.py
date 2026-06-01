@@ -679,7 +679,7 @@ def make_figure_avg(cmip7_scenarios, hist_years, hist_vals):
             label="Historical (GCP/OWID)", zorder=10)
 
     ax.set_xlim(1983, 2115)
-    ax.set_ylim(-30, 100)
+    ax.set_ylim(-35, 145)
     ax.set_xlabel("Year", fontsize=11)
     ax.set_ylabel("CO₂ emissions (Gt CO₂ yr⁻¹)", fontsize=11)
     ax.set_title(
