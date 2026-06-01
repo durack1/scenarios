@@ -533,6 +533,15 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
         ax.plot([bx - tick_hw * 0.6, bx + tick_hw * 0.6], [mean, mean],
                 color=c, lw=1.5, ls="--", zorder=5)
 
+    # ── summary bar legend ────────────────────────────────────────────────────
+    lx = 2113.5  # label x, just right of the rightmost bar
+    ax.text(2108, 140, "at 2100", fontsize=7, color="0.4",
+            ha="center", va="bottom", style="italic")
+    ax.text(lx, p90, "p90",    fontsize=6.5, color="0.45", va="center")
+    ax.text(lx, p50, "median", fontsize=6.5, color="0.45", va="center")
+    ax.text(lx, mean,"mean ╌", fontsize=6.5, color="0.45", va="center")
+    ax.text(lx, p10, "p10",    fontsize=6.5, color="0.45", va="center")
+
     # ── "futures avoided / opportunities lost" annotations ───────────────────
     ax.annotate(
         "Futures\navoided",
@@ -543,8 +552,8 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
     )
     ax.annotate(
         "Opportunities\nlost",
-        xy=(2026, 37),
-        xytext=(2010, 18),
+        xy=(2026, 20),
+        xytext=(2010, 5),
         fontsize=9, ha="center", color="0.3", fontweight="bold",
         arrowprops=dict(arrowstyle="->", color="0.4", lw=1.2),
     )
@@ -593,14 +602,14 @@ def make_figure(cmip7_scenarios, hist_years, hist_vals):
 # ─── per-generation statistics ───────────────────────────────────────────────
 
 def family_stats(time, data_dict, conv=1.0):
-    """Return (mean, p10, p90) arrays on T_FINE across all scenarios."""
+    """Return (mean, min, max) arrays on T_FINE across all scenarios."""
     matrix = np.array([
         interp(time, vals) * conv for vals in data_dict.values()
     ])
     mean = np.nanmean(matrix, axis=0)
-    p10  = np.nanpercentile(matrix, 10, axis=0)
-    p90  = np.nanpercentile(matrix, 90, axis=0)
-    return mean, p10, p90
+    lo   = np.nanmin(matrix, axis=0)
+    hi   = np.nanmax(matrix, axis=0)
+    return mean, lo, hi
 
 
 # ─── average-per-generation sanity-check figure ───────────────────────────────
@@ -653,7 +662,7 @@ def make_figure_avg(cmip7_scenarios, hist_years, hist_vals):
     ax.set_ylabel("CO₂ emissions (Gt CO₂ yr⁻¹)", fontsize=11)
     ax.set_title(
         "Mean CO₂ emissions trajectory per CMIP scenario generation\n"
-        "(shading = 10th–90th percentile across all scenarios in each family)",
+        "(shading = full scenario range across all scenarios in each family)",
         fontsize=11, pad=10,
     )
     ax.legend(loc="upper left", fontsize=8.5, framealpha=0.85, edgecolor="0.7")
